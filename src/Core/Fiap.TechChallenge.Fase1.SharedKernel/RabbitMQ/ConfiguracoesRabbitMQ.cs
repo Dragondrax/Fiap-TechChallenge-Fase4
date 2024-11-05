@@ -10,7 +10,7 @@ namespace Fiap.TechChallenge.Fase1.SharedKernel.RabbitMQ
         }
         private ConnectionFactory ObterConexaoRabbitMQ()
         {
-            return new ConnectionFactory { HostName = "localhost", UserName = "techchallenge", Password = "techchallenge" };
+            return new ConnectionFactory { HostName = "host.docker.internal", UserName = "techchallenge", Password = "techchallenge" };
         }
     }
 }

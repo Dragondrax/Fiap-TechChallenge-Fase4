@@ -8,6 +8,8 @@ WORKDIR /src
 COPY ["src/Workers/Fiap.TechChallenge.Fase3.Contato/Fiap.TechChallenge.Fase3.Contato.csproj", "/src/Workers/Fiap.TechChallenge.Fase3.Contato/"]
 COPY ["src/Core/Fiap.TechChallenge.Fase1.SharedKernel/Fiap.TechChallenge.Fase1.SharedKernel.csproj", "/src/Core/Fiap.TechChallenge.Fase1.SharedKernel/"]
 COPY ["src/Services/Fiap.TechChallenge.Fase1.IoC/Fiap.TechChallenge.Fase1.IoC.csproj", "/src/Services/Fiap.TechChallenge.Fase1.IoC/"]
+COPY ["src/Workers/Fiap.TechChallenge.Fase3.RabbitMQ/Fiap.TechChallenge.Fase3.RabbitMQ.csproj", "/src/Workers/Fiap.TechChallenge.Fase3.RabbitMQ/"]
+
 
 RUN dotnet restore "/src/Workers/Fiap.TechChallenge.Fase3.Contato/Fiap.TechChallenge.Fase3.Contato.csproj"
 

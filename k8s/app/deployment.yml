@@ -1,0 +1,27 @@
+apiVersion: api/v1
+kind: HorizontalPodAutoscaler
+metadata: 
+  name: api_techchallenge
+spec: 
+  scaleTargetRef: 
+    apiVersion: api/v1
+    kind: Deployment
+    name: api_techchallenge_deployment
+  selector:
+    matchLabels: 
+      app: api_techchallenge
+  template: 
+    metadata:
+      labels:
+        app: api_techchallenge
+    spec: 
+      containers:
+      - name: api_techchallenge
+        image: fiap-techchallenge-fase4-fiaptechchallengefase2.api:latest
+        envFrom: 
+        - configMapRef:
+          name: api_techchallenge_config
+        - secretRef:
+          name: postgres_secret
+        ports:
+        - containerPort: 80

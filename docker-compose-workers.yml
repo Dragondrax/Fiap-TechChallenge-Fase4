@@ -6,7 +6,25 @@ services:
       context: .
       dockerfile: ./src/Workers/Fiap.TechChallenge.Fase3.Contato/Dockerfile
     ports:
-      - "8080:8081"
+      - "8084:8084"
+    networks:
+      - fiap-network
+      
+  worker.persistencia:
+    build: 
+      context: .
+      dockerfile: ./src/Workers/Fiap.TechChallenge.Fase3.Persistencia/Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - fiap-network
+
+  worker.usuario:
+    build: 
+      context: .
+      dockerfile: ./src/Workers/Fiap.TechChallenge.Fase3.Usuario/Dockerfile
+    ports:
+      - "8083:8083"
     networks:
       - fiap-network
      
