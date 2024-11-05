@@ -14,10 +14,11 @@ services:
     networks:
       - fiap-network
 
-  fiaptechchallengefase2.api:
+  fiaptechchallengefase4.api:
     build:
       context: .
       dockerfile: ./Dockerfile
+    image: igorsallowicz/techchallenge_desafio_4:api_latest
     ports:
       - "8080:8080"
     networks:
@@ -41,7 +42,7 @@ services:
       RABBITMQ_DEFAULT_USER: "techchallenge"
       RABBITMQ_DEFAULT_PASS: "techchallenge"
     depends_on:
-      - fiaptechchallengefase2.api
+      - fiaptechchallengefase4.api
 
   grafana:
     image: grafana/grafana-oss
@@ -59,7 +60,7 @@ services:
     networks:
       - fiap-network
     depends_on:
-      - fiaptechchallengefase2.api
+      - fiaptechchallengefase4.api
     
 
   zabbix-server:
@@ -139,7 +140,7 @@ services:
     ports:
       - 9090:9090
     depends_on:
-      - fiaptechchallengefase2.api
+      - fiaptechchallengefase4.api
 networks:
   fiap-network:
     driver: bridge

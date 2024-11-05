@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   worker.contatos:
+    image: igorsallowicz/techchallenge_desafio_4:worker_contato_latest
     build: 
       context: .
       dockerfile: ./src/Workers/Fiap.TechChallenge.Fase3.Contato/Dockerfile
@@ -11,6 +12,7 @@ services:
       - fiap-network
       
   worker.persistencia:
+    image: igorsallowicz/techchallenge_desafio_4:worker_persistencia_latest
     build: 
       context: .
       dockerfile: ./src/Workers/Fiap.TechChallenge.Fase3.Persistencia/Dockerfile
@@ -20,6 +22,7 @@ services:
       - fiap-network
 
   worker.usuario:
+    image: igorsallowicz/techchallenge_desafio_4:worker_usuario_latest
     build: 
       context: .
       dockerfile: ./src/Workers/Fiap.TechChallenge.Fase3.Usuario/Dockerfile

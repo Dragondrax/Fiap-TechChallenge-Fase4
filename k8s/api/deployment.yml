@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-techchallenge-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-techchallenge
+  template:
+    metadata:
+      labels:
+        app: api-techchallenge
+    spec:
+      containers:
+      - name: api-techchallenge
+        image: igorsallowicz/techchallenge_desafio_4:api_latest
+        envFrom:
+          - secretRef:
+              name: postgres-secret
+        ports:
+          - containerPort: 80
