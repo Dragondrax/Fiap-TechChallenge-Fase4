@@ -17,6 +17,7 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 - GIT Link: https://git-scm.com/downloads
 - RabbitMQ Link: https://www.rabbitmq.com/
 - Kubernets Link: https://kubernetes.io/docs/tasks/tools/
+- Minikube Link: https://minikube.sigs.k8s.io/docs/handbook/kubectl/
 
 ## 🔧 Instalação
 1. Iniciar o Docker no seu computador
