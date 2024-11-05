@@ -1,0 +1,41 @@
+name: TechChallengeFase3 - .NET
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+  
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup do .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0
+        
+    - name: Setup Docker para PostgresSQL
+      run: docker pull postgres
+
+    - name: Setup Docker para RabbitMQ
+      run: docker pull rabbitmq:3-management
+      
+    - name: Restore dependencias do Projeto 
+      run: dotnet restore src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.sln
+    
+    - name: Build projeto
+      run: dotnet build --configuration Release src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.sln      
+     
+    - name: Testes Unitários
+      run: dotnet test --configuration Release --verbosity quiet src/Tests/Fiap.TechChallenge.Fase1.Tests
+
+    - name: Testes de Integração 
+      run: dotnet test --configuration Release src/Tests/Fiap.TechChallenge.Fase1.Integration.Test
+      
+    - name: Saída Final Tech Challenge Fase 3
+      run: echo "Build projeto API, criação do banco, utilização das migrations e testes unitários/integração finalizados para a validação do Tech Challenge Fase 3."
