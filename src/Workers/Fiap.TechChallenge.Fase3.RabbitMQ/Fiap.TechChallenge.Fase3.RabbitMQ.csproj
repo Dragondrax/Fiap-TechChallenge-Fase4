@@ -10,4 +10,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Fiap.TechChallenge.Fase1.SharedKernel\Fiap.TechChallenge.Fase1.SharedKernel.csproj" />
+  </ItemGroup>
 </Project>

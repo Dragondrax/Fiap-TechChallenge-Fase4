@@ -17,20 +17,20 @@
 mono_crash.*
 
 # Build results
-*/[Dd]ebug/
-*/[Dd]ebugPublic/
-*/[Rr]elease/
-*/[Rr]eleases/
-*/x64/
-*/x86/
-*/[Ww][Ii][Nn]32/
-*/[Aa][Rr][Mm]/
-*/[Aa][Rr][Mm]64/
-*/bld/
-*/[Bb]in/
-*/[Oo]bj/
-*/[Ll]og/
-*/[Ll]ogs/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -41,8 +41,8 @@ mono_crash.*
 Generated\ Files/
 
 # MSTest test Results
-*/[Tt]est[Rr]esult*/
-*/[Bb]uild[Ll]og.*
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
 
 # NUnit
 *.VisualState.xml
@@ -50,8 +50,8 @@ TestResult.xml
 nunit-*.xml
 
 # Build Results of an ATL Project
-*/[Dd]ebugPS/
-*/[Rr]eleasePS/
+[Dd]ebugPS/
+[Rr]eleasePS/
 dlldata.c
 
 # Benchmark Results
@@ -82,6 +82,8 @@ StyleCopReport.xml
 *.pgc
 *.pgd
 *.rsp
+# but not Directory.Build.rsp, as it configures directory-level build defaults
+!Directory.Build.rsp
 *.sbr
 *.tlb
 *.tli
@@ -396,71 +398,3 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/src/Core/Fiap.TechChallenge.Fase1.SharedKernel/bin/Debug/net8.0/Fiap.TechChallenge.Fase1.SharedKernel.deps.json
-*.dll
-/src/Core/Fiap.TechChallenge.Fase1.SharedKernel/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-/src/Core/Fiap.TechChallenge.Fase1.SharedKernel/obj/Debug/net8.0
-/src/Core/Fiap.TechChallenge.Fase1.SharedKernel/obj
-/src/Services/Fiap.TechChallenge.Fase1.Aplicacao/bin/Debug/net8.0
-/src/Services/Fiap.TechChallenge.Fase1.Aplicacao/obj/Debug/net8.0
-/src/Services/Fiap.TechChallenge.Fase1.Aplicacao/obj
-/src/Services/Fiap.TechChallenge.Fase1.Data/bin/Debug/net8.0
-/src/Services/Fiap.TechChallenge.Fase1.Data/obj/Debug/net8.0
-/src/Services/Fiap.TechChallenge.Fase1.Data/obj
-/src/Services/Fiap.TechChallenge.Fase1.Dominio/obj
-/src/Services/Fiap.TechChallenge.Fase1.Dominio/bin/Debug/net8.0
-/src/Services/Fiap.TechChallenge.Fase1.Infraestructure/bin/Debug/net8.0
-/src/Services/Fiap.TechChallenge.Fase1.Infraestructure/obj/Debug/net8.0
-/src/Services/Fiap.TechChallenge.Fase1.Infraestructure/obj
-/src/Services/Fiap.TechChallenge.Fase1.IoC/bin/Debug/net8.0
-/src/Services/Fiap.TechChallenge.Fase1.IoC/obj/Debug/net8.0
-/src/Services/Fiap.TechChallenge.Fase1.IoC/obj
-/src/Tests/Fiap.TechChallenge.Fase1.Tests/bin/Debug/net8.0
-/src/Tests/Fiap.TechChallenge.Fase1.Tests/obj/Debug/net8.0
-/src/Tests/Fiap.TechChallenge.Fase1.Tests/obj
-/src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/bin/Debug/net8.0
-/src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/obj/Debug/net8.0
-/src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/obj
-/src/Tests/Fiap.TechChallenge.Fase1.Tests/bin/Release/net8.0/CoverletSourceRootsMapping_Fiap.TechChallenge.Fase1.Tests
-/src/Tests/Fiap.TechChallenge.Fase1.Integration.Test/bin
-/src/Tests/Fiap.TechChallenge.Fase1.Integration.Test/obj
-/src/WebApi/Fiap.TechChallenge.Fase1.Integracao.Tests/obj
-/data/postgres
-/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Persistencia.AssemblyInfo.cs
-/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/Fiap.TechChallenge.Fase3.Persistencia.csproj.nuget.dgspec.json
-/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/Fiap.TechChallenge.Fase3.Persistencia.csproj.nuget.g.targets
-/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/project.assets.json
-*.json
-*.exe
-*.Up2Date
-/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Contato.AssemblyInfo.cs
-/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/obj/Debug/net8.0
-/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/obj/Fiap.TechChallenge.Fase3.Contato.csproj.nuget.dgspec.json
-/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/obj/Fiap.TechChallenge.Fase3.Contato.csproj.nuget.g.props
-/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/obj/Fiap.TechChallenge.Fase3.Contato.csproj.nuget.g.targets
-/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/obj/project.assets.json
-/src/Workers/Fiap.TechChallenge.Fase3.Cadastrar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Usuario.AssemblyInfo.cs
-*.BuildWithSkipAnalyzers
-*.txt
-/src/Workers/Fiap.TechChallenge.Fase3.Cadastrar/obj/Fiap.TechChallenge.Fase3.Usuario.csproj.nuget.dgspec.json
-/src/Workers/Fiap.TechChallenge.Fase3.Cadastrar/obj/Fiap.TechChallenge.Fase3.Usuario.csproj.nuget.g.props
-/src/Workers/Fiap.TechChallenge.Fase3.Cadastrar/obj/project.assets.json
-/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/bin/Debug/net8.0/appsettings.Development.json
-/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/bin/Debug/net8.0/appsettings.json
-/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/Fiap.TechChallenge.Fase3.Persistencia.csproj.nuget.g.props
-/src/Workers/Fiap.TechChallenge.Fase3.Workers/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.RabbitMQ.AssemblyInfo.cs
-/src/Workers/Fiap.TechChallenge.Fase3.Workers/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.RabbitMQ.csproj.FileListAbsolute.txt
-/src/Workers/Fiap.TechChallenge.Fase3.Workers/obj/Fiap.TechChallenge.Fase3.RabbitMQ.csproj.nuget.dgspec.json
-/src/Workers/Fiap.TechChallenge.Fase3.Workers/obj/Fiap.TechChallenge.Fase3.RabbitMQ.csproj.nuget.g.props
-/src/Workers/Fiap.TechChallenge.Fase3.Workers/obj/project.assets.json
-/src/Workers/Fiap.TechChallenge.Fase3.Workers/bin/Debug/net8.0/Fiap.TechChallenge.Fase3.RabbitMQ.deps.json
-*.cs
-*.editorconfig
-/src/Workers/Fiap.TechChallenge.Fase3.Usuario/obj/Fiap.TechChallenge.Fase3.Usuario.csproj.nuget.g.props
-*.targets
-/src/Tests/Fiap.TechChallenge.Fase1.Tests/bin/Release/net8.0
-/src/Workers/Fiap.TechChallenge.Fase3.Usuarios/obj
-/src/Workers/Fiap.TechChallenge.Fase3.Workers/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.RabbitMQ.GeneratedMSBuildEditorConfig.editorconfig
-/src/Workers/Fiap.TechChallenge.Fase3.Cadastrar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Usuario.GeneratedMSBuildEditorConfig.editorconfig
-/src/Workers/Fiap.TechChallenge.Fase3.Deletar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Persistencia.GeneratedMSBuildEditorConfig.editorconfig
-/src/Workers/Fiap.TechChallenge.Fase3.Atualizar/obj/Debug/net8.0/Fiap.TechChallenge.Fase3.Contato.GeneratedMSBuildEditorConfig.editorconfig

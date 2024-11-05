@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  worker.contatos:
+    build: 
+      context: .
+      dockerfile: ./src/Workers/Fiap.TechChallenge.Fase3.Contato/Dockerfile
+    ports:
+      - "8080:8081"
+    networks:
+      - fiap-network
+     
+networks:
+  fiap-network:
+    driver: bridge

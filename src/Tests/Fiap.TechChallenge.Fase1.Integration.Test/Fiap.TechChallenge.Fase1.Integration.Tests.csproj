@@ -26,9 +26,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Fiap.TechChallenge.Fase1.SharedKernel\Fiap.TechChallenge.Fase1.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.Aplicacao\Fiap.TechChallenge.Fase1.Aplicacao.csproj" />
+    <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.Data\Fiap.TechChallenge.Fase1.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.Dominio\Fiap.TechChallenge.Fase1.Dominio.csproj" />
+    <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.Infraestructure\Fiap.TechChallenge.Fase1.Infraestructure.csproj" />
+    <ProjectReference Include="..\..\Services\Fiap.TechChallenge.Fase1.IoC\Fiap.TechChallenge.Fase1.IoC.csproj" />
     <ProjectReference Include="..\..\WebApi\Fiap.TechChallenge.Fase1.WebAPI\Fiap.TechChallenge.Fase1.WebAPI.csproj" />
-    <ProjectReference Include="..\..\Workers\Fiap.TechChallenge.Fase3.Atualizar\Fiap.TechChallenge.Fase3.Contato.csproj" />
-    <ProjectReference Include="..\..\Workers\Fiap.TechChallenge.Fase3.Deletar\Fiap.TechChallenge.Fase3.Persistencia.csproj" />
+    <ProjectReference Include="..\..\Workers\Fiap.TechChallenge.Fase3.Contato\Fiap.TechChallenge.Fase3.Contato.csproj" />
+    <ProjectReference Include="..\..\Workers\Fiap.TechChallenge.Fase3.Persistencia\Fiap.TechChallenge.Fase3.Persistencia.csproj" />
+    <ProjectReference Include="..\..\Workers\Fiap.TechChallenge.Fase3.RabbitMQ\Fiap.TechChallenge.Fase3.RabbitMQ.csproj" />
     <ProjectReference Include="..\..\Workers\Fiap.TechChallenge.Fase3.Usuario\Fiap.TechChallenge.Fase3.Usuario.csproj" />
   </ItemGroup>
 
