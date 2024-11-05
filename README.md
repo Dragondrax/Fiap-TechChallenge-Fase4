@@ -1,5 +1,5 @@
-# Fiap-TechChallenge-Fase3
-Esse projeto foi desenvolvido com intuito de colocar em prática todos os conceitos aprendidos na Fase 3 da Pós Graduação da FIAP.
+# Fiap-TechChallenge-Fase4
+Esse projeto foi desenvolvido com intuito de colocar em prática todos os conceitos aprendidos na Fase 4 da Pós Graduação da FIAP.
 
 |Alunos| E-mail|
 |------|-------|
@@ -15,6 +15,8 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 - Docker Link: https://www.docker.com/products/docker-desktop/
 - pgAdmin Link: https://www.pgadmin.org/download/
 - GIT Link: https://git-scm.com/downloads
+- RabbitMQ Link: https://www.rabbitmq.com/
+- Kubernets Link: https://kubernetes.io/docs/tasks/tools/
 
 ## 🔧 Instalação
 1. Iniciar o Docker no seu computador
@@ -99,4 +101,4 @@ Foi realizado testes de integração utilizando xUnit, Docker e Postgres.
 - Grafana
 - Prometheus
 - Zabbix
-.
+- Kubernets
