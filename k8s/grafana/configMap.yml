@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config-map
+data:
+  GF_USERS_ALLOW_SIGN_UP: "false"
+  GF_INSTALL_PLUGINS: "alexanderzobnin-zabbix-app"
