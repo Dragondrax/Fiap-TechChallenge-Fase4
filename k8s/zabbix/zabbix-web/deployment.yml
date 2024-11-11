@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: zabbix-web
+spec:
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: zabbix-web
+  template: 
+    metadata: 
+      labels: 
+        app: zabbix-web
+    spec:
+      containers:
+      - name: zabbix-web
+        image: zabbix/zabbix-web-nginx-pgsql:latest
+        envFrom: 
+        - configMapRef:
+            name: zabbix-web-config-map
+        - secretRef:
+            name: zabbix-server-secret
+        volumeMounts:
+        - name: zabbix-web-data
+          mountPath: /usr/share/zabbix
+      volumes:
+      - name: zabbix-web-data
+        persistentVolumeClaim:
+          claimName: zabbix-web-pvc

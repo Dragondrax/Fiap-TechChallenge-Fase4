@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zabbix-agent-config-map
+data:
+  ZBX_HOSTNAME: zabbix-agent
+  ZBX_SERVER_HOST: zabbix-server
+  ZBX_SERVER_ACTIVE: zabbix-server
+  ALLOWED_HOSTS: zabbix-server

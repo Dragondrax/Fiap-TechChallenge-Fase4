@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: zabbix-server
+spec:
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: zabbix-server
+  template: 
+    metadata: 
+      labels: 
+        app: zabbix-server
+    spec:
+      containers:
+      - name: zabbix-server
+        image: zabbix/zabbix-server-pgsql:ubuntu-latest
+        envFrom: 
+        - configMapRef:
+            name: zabbix-server-config-map
+        - secretRef:
+            name: zabbix-server-secret
+        volumeMounts:
+        - name: zabbix-server-data
+          mountPath: /var/lib/zabbix
+        - name: zabbix-server-snmptraps-data
+          mountPath: /var/lib/zabbix/snmptraps
+        - name: zabbix-server-export-data
+          mountPath: /var/lib/zabbix/export
+      volumes:
+      - name: zabbix-server-data
+        persistentVolumeClaim:
+          claimName: zabbix-server-pvc
+      - name: zabbix-server-snmptraps-data
+        persistentVolumeClaim:
+          claimName: zabbix-server-snmptraps-pvc
+      - name: zabbix-server-export-data
+        persistentVolumeClaim:
+          claimName: zabbix-server-export-pvc
