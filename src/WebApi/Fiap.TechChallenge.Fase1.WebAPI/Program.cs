@@ -49,7 +49,8 @@ InjecaoDependenciaConfig.ResolverDependencia(builder.Services);
 
 builder.Services.AddDbContext<Fiap.TechChallenge.Fase1.Data.Context.ContextTechChallenge>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("conexao"), x => x.MigrationsAssembly("Fiap.TechChallenge.Fase1.Data")).UseLowerCaseNamingConvention();
+    var conexao = builder.Configuration.GetConnectionString("conexao");
+    options.UseNpgsql(conexao, x => x.MigrationsAssembly("Fiap.TechChallenge.Fase1.Data")).UseLowerCaseNamingConvention();
 });
 
 builder.Services.AddSwaggerGen(c =>

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: zabbix-server
+  name: zabbix-server-deployment
 spec:
   replicas: 1
   selector: 
@@ -13,7 +13,7 @@ spec:
         app: zabbix-server
     spec:
       containers:
-      - name: zabbix-server
+      - name: zabbix-server-container
         image: zabbix/zabbix-server-pgsql:ubuntu-latest
         envFrom: 
         - configMapRef:
@@ -27,6 +27,8 @@ spec:
           mountPath: /var/lib/zabbix/snmptraps
         - name: zabbix-server-export-data
           mountPath: /var/lib/zabbix/export
+        ports:
+          - containerPort: 10051
       volumes:
       - name: zabbix-server-data
         persistentVolumeClaim:

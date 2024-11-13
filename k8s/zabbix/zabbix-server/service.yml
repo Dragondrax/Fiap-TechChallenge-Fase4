@@ -9,4 +9,4 @@ spec:
   ports: 
     - port: 10051
       targetPort: 10051
-      nodePort: 30101
+      nodePort: 30201
