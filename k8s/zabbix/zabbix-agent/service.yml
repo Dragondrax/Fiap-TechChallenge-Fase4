@@ -3,10 +3,9 @@ kind: Service
 metadata: 
   name: zabbix-agent-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: zabbix-agent
   ports: 
-    - port: 10051
-      targetPort: 10051
-      nodePort: 30100
+    - port: 10050
+      targetPort: 10050

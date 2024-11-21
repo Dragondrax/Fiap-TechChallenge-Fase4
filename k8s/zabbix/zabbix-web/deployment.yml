@@ -20,10 +20,4 @@ spec:
             name: zabbix-web-config-map
         - secretRef:
             name: zabbix-server-secret
-        volumeMounts:
-        - name: zabbix-web-data
-          mountPath: /usr/share/zabbix
-      volumes:
-      - name: zabbix-web-data
-        persistentVolumeClaim:
-          claimName: zabbix-web-pvc
+        

@@ -3,10 +3,9 @@ kind: Service
 metadata: 
   name: zabbix-server-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: zabbix-server
   ports: 
     - port: 10051
       targetPort: 10051
-      nodePort: 30201
