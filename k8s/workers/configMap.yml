@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: worker-configmap
+data:
+  RABBITMQ_HOST: "rabbitmq-service"
+  RABBITMQ_PORT: "5672"  # Porta padrão do RabbitMQ
+  POSTGRES_HOST: "postgres-service"
+  POSTGRES_PORT: "5432"  # Porta padrão do PostgreSQL
+  POSTGRES_DB: "techchallenge"
+  POSTGRES_USER: "postgres"

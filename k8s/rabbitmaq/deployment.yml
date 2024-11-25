@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deployment
+  labels:
+    app: rabbitmq
+spec:
+  replicas: 1  # Número de réplicas do RabbitMQ
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: "rabbitmq:3-management"  # Imagem oficial do RabbitMQ com a interface de gerenciamento
+        envFrom:
+        - secretRef:
+            name: rabbitmq-secret
+        ports:
+          - containerPort: 5672  # Porta padrão do RabbitMQ para comunicação AMQP
+          - containerPort: 15672 # Porta para a interface web de gerenciamento
+        volumeMounts:
+          - name: rabbitmq-data
+            mountPath: /var/lib/rabbitmq  # Persistência de dados do RabbitMQ
+      volumes:
+        - name: rabbitmq-data
+          persistentVolumeClaim:
+            claimName: rabbitmq-pvc  # Referência ao PVC (PersistentVolumeClaim)

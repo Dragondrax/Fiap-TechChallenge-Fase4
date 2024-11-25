@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: worker-usuario-service
+spec:
+  selector:
+    app: worker-usuario
+  ports:
+    - protocol: TCP
+      port: 8083       # Porta exposta externamente
+      targetPort: 8083   # Porta do container
+  type: NodePort  # Exposição via NodePort

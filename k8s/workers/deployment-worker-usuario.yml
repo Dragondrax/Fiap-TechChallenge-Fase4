@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-usuario-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker-usuario
+  template:
+    metadata:
+      labels:
+        app: worker-usuario
+    spec:
+      containers:
+      - name: worker-usuario-container
+        image: igorsallowicz/techchallenge_desafio_4:worker_usuario_latest
+        envFrom:
+          - secretRef:
+              name: worker-secret  # Carregar todas as variáveis do worker-secret
+        env:
+          - name: RABBITMQ_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: worker-configmap  # Referência ao ConfigMap
+                key: RABBITMQ_HOST
+          - name: RABBITMQ_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: worker-configmap
+                key: RABBITMQ_PORT
+          - name: POSTGRES_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: worker-configmap
+                key: POSTGRES_HOST
+          - name: POSTGRES_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: worker-configmap
+                key: POSTGRES_PORT
+          - name: POSTGRES_DB
+            valueFrom:
+              configMapKeyRef:
+                name: worker-configmap
+                key: POSTGRES_DB
+          - name: POSTGRES_USER
+            valueFrom:
+              configMapKeyRef:
+                name: worker-configmap
+                key: POSTGRES_USER
+        ports:
+          - containerPort: 8083
