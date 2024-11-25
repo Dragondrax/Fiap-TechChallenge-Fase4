@@ -1,32 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
+metadata:
   name: zabbix-agent
+  labels:
+    app: zabbix-agent
 spec:
   replicas: 1
-  selector: 
-    matchLabels: 
+  selector:
+    matchLabels:
       app: zabbix-agent
-  template: 
-    metadata: 
-      labels: 
+  template:
+    metadata:
+      labels:
         app: zabbix-agent
     spec:
       containers:
-      - name: zabbix-agent
-        image: zabbix/zabbix-agent:latest
-        envFrom: 
-        - configMapRef:
-            name: zabbix-agent-config-map
-        volumeMounts:
-        - name: zabbix-agent-data
-          mountPath: /rootfs:ro
-        - name: zabbix-agent-root-data
-          mountPath: /var/run
+        - name: zabbix-agent
+          image: zabbix/zabbix-agent:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              cp /config/zabbix_agentd.conf /etc/zabbix/zabbix_agentd.conf &&
+              mkdir -p /var/log/zabbix &&
+              zabbix_agentd -f
+          volumeMounts:
+            - name: zabbix-config
+              mountPath: /config
+            - name: zabbix-logs
+              mountPath: /var/log/zabbix
       volumes:
-      - name: zabbix-agent-data
-        persistentVolumeClaim:
-          claimName: zabbix-agent-pvc
-      - name: zabbix-agent-root-data
-        persistentVolumeClaim:
-          claimName: zabbix-agent-root-pvc
+        - name: zabbix-config
+          configMap:
+            name: zabbix-agent-config
+        - name: zabbix-logs
+          emptyDir: {}
