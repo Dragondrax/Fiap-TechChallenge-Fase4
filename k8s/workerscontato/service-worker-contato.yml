@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: worker-contato-service
+spec:
+  selector:
+    app: worker-contato
+  ports:
+    - protocol: TCP
+      port: 8084       # Porta exposta externamente
+      targetPort: 8084   # Porta do container
+  type: NodePort  # Exposição via NodePort

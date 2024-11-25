@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: worker-persistencia-service
+spec:
+  selector:
+    app: worker-persistencia
+  ports:
+    - protocol: TCP
+      port: 8082       # Porta exposta externamente
+      targetPort: 8082   # Porta do container
+  type: NodePort  # Exposição via NodePort

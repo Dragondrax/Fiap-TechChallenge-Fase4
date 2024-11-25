@@ -13,7 +13,7 @@ spec:
         app: api-techchallenge
     spec:
       containers:
-      - name: api-techchallenge
+      - name: api-techchallenge-container
         image: igorsallowicz/techchallenge_desafio_4:api_latest
         envFrom:
           - secretRef:
