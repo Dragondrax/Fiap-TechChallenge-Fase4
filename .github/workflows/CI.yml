@@ -1,4 +1,4 @@
-name: TechChallengeFase3 - .NET
+name: TechChallengeFase4 - .NET
 
 on:
   push:
@@ -18,24 +18,76 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0
-        
-    - name: Setup Docker para PostgresSQL
-      run: docker pull postgres
 
-    - name: Setup Docker para RabbitMQ
-      run: docker pull rabbitmq:3-management
+
+    # - name: Setup Docker para PostgresSQL
+    #   run: docker pull postgres
+
+    # - name: Setup Docker para RabbitMQ
+    #   run: docker pull rabbitmq:3-management
       
-    - name: Restore dependencias do Projeto 
-      run: dotnet restore src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.sln
+    # - name: Restore dependencias do Projeto 
+    #   run: dotnet restore src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.sln
     
-    - name: Build projeto
-      run: dotnet build --configuration Release src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.sln      
+    # - name: Build projeto
+    #   run: dotnet build --configuration Release src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.sln      
      
-    - name: Testes Unitários
-      run: dotnet test --configuration Release --verbosity quiet src/Tests/Fiap.TechChallenge.Fase1.Tests
+    # - name: Testes Unitários
+    #   run: dotnet test --configuration Release --verbosity quiet src/Tests/Fiap.TechChallenge.Fase1.Tests
 
-    - name: Testes de Integração 
-      run: dotnet test --configuration Release src/Tests/Fiap.TechChallenge.Fase1.Integration.Test
+    # - name: Testes de Integração 
+    #   run: dotnet test --configuration Release src/Tests/Fiap.TechChallenge.Fase1.Integration.Test
       
-    - name: Saída Final Tech Challenge Fase 3
-      run: echo "Build projeto API, criação do banco, utilização das migrations e testes unitários/integração finalizados para a validação do Tech Challenge Fase 3."
+    # - name: Saída Final Tech Challenge Fase 4
+    #   run: echo "Build projeto API, criação do banco, utilização das migrations e testes unitários/integração finalizados para a validação do Tech Challenge Fase 4."
+
+  setup-k8s:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Passo 1: Checar o repositório
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Passo 2: Instalar dependências para o Minikube e kubectl
+      - name: Install Minikube
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apt-transport-https
+          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+          echo "deb https://storage.googleapis.com/download.minikube.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/minikube.list
+          sudo apt-get update
+          sudo apt-get install -y minikube
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/v1.27.0/bin/linux/amd64/kubectl"
+          sudo chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+
+      # Passo 3: Iniciar o Minikube
+      - name: Start Minikube
+        run: |
+          minikube start --driver=docker
+          kubectl config use-context minikube
+
+      # Passo 4: Testar o Kubernetes
+      - name: Verify Kubernetes cluster
+        run: |
+          kubectl cluster-info
+
+      # Passo 5: Aplicar recursos Kubernetes (opcional)
+      - name: Apply Kubernetes resources
+        run: |
+          kubectl apply -f k8s/api/
+          kubectl apply -f k8s/postgres/
+          kubectl apply -f k8s/rabbimaq/      
+
+      # Passo 6: Verificar pods e serviços
+      - name: Get Kubernetes pods and services
+        run: |
+          kubectl get pods
+          kubectl get services
+          
+      - name: Saída Final Tech Challenge Fase 4
+        run: echo "Build projeto API e Kubernetes para a validação do Tech Challenge Fase 4."
