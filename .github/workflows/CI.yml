@@ -41,12 +41,13 @@ jobs:
     # - name: Saída Final Tech Challenge Fase 4
     #   run: echo "Build projeto API, criação do banco, utilização das migrations e testes unitários/integração finalizados para a validação do Tech Challenge Fase 4."
 
+jobs:
   setup-k8s:
     runs-on: ubuntu-latest
     
     steps:
       # Passo 1: Checar o repositório
-      - name: Checkout repository
+      - name: Kubernetes
         uses: actions/checkout@v3
 
       # Passo 2: Instalar dependências para o Minikube e kubectl
@@ -88,6 +89,6 @@ jobs:
         run: |
           kubectl get pods
           kubectl get services
-          
+
       - name: Saída Final Tech Challenge Fase 4
         run: echo "Build projeto API e Kubernetes para a validação do Tech Challenge Fase 4."
