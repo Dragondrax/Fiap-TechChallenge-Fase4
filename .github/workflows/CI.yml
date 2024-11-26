@@ -36,6 +36,11 @@ jobs:
         run: |
           kubectl cluster-info
 
+      # Passo 6: Verificar namespace
+      - name: Verificar namespace
+        run: |
+          kubectl get namespaces
+
       # Passo 5: Aplicar recursos Kubernetes (opcional)
       - name: Apply Kubernetes resources
         run: |
