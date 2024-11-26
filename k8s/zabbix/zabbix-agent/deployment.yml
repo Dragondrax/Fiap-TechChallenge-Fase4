@@ -15,22 +15,23 @@ spec:
         app: zabbix-agent
     spec:
       containers:
-        - name: zabbix-agent
-          image: zabbix/zabbix-agent:latest
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              cp /config/zabbix_agentd.conf /etc/zabbix/zabbix_agentd.conf &&
-              mkdir -p /var/log/zabbix &&
-              zabbix_agentd -f
-          volumeMounts:
-            - name: zabbix-config
-              mountPath: /config
-            - name: zabbix-logs
-              mountPath: /var/log/zabbix
-      volumes:
+      - name: zabbix-agent
+        image: zabbix/zabbix-agent:latest
+        volumeMounts:
         - name: zabbix-config
-          configMap:
-            name: zabbix-agent-config
+          mountPath: /etc/zabbix/zabbix_agentd.conf
+          subPath: zabbix_agentd.conf
         - name: zabbix-logs
-          emptyDir: {}
+          mountPath: /var/log/zabbix
+        - name: zabbix-run
+          mountPath: /var/run/zabbix
+        securityContext:
+          privileged: true
+      volumes:
+      - name: zabbix-config
+        configMap:
+          name: zabbix-agent-config
+      - name: zabbix-logs
+        emptyDir: {}
+      - name: zabbix-run
+        emptyDir: {}

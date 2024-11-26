@@ -17,17 +17,33 @@ spec:
       containers:
         - name: zabbix-server
           image: zabbix/zabbix-server-pgsql:ubuntu-latest
-          envFrom:
-            - configMapRef:
-                name: zabbix-server-config
-            - secretRef:
-                name: zabbix-server-secret
           ports:
             - containerPort: 10051
+          env:
+            - name: DB_SERVER_HOST
+              value: "postgres-service"
+            - name: DB_SERVER_PORT
+              value: "5432"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "102030"
+            - name: POSTGRES_DB
+              value: "zabbix"
           volumeMounts:
             - name: zabbix-server-data
               mountPath: /var/lib/zabbix
+            - name: zabbix-snmptraps-data
+              mountPath: /var/lib/zabbix/snmptraps
+            - name: zabbix-export-data
+              mountPath: /var/lib/zabbix/export
       volumes:
         - name: zabbix-server-data
           persistentVolumeClaim:
-            claimName: zabbix-server-pvc
+            claimName: zabbix-server-data
+        - name: zabbix-snmptraps-data
+          persistentVolumeClaim:
+            claimName: zabbix-snmptraps-data
+        - name: zabbix-export-data
+          persistentVolumeClaim:
+            claimName: zabbix-export-data

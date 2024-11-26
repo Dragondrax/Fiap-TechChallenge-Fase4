@@ -2,10 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: zabbix-agent-service
+  labels:
+    app: zabbix-agent
 spec:
-  type: ClusterIP
   selector:
     app: zabbix-agent
   ports:
-    - port: 10050
-      targetPort: 10050
+  - protocol: TCP
+    port: 10050
+    targetPort: 10050

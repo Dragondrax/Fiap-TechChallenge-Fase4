@@ -2,12 +2,14 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: zabbix-agent-config
+  namespace: default
 data:
   zabbix_agentd.conf: |
+    PidFile=/var/run/zabbix/zabbix_agentd.pid
     LogFile=/var/log/zabbix/zabbix_agentd.log
     LogFileSize=0
-    DebugLevel=3
-    Server=zabbix-server-service
-    ServerActive=zabbix-server-service:10051
-    Hostname=zabbix-agent
+    Server=10.97.35.0
+    ServerActive=10.97.35.0:10051
+    Hostname=Zabbix Server
     Include=/etc/zabbix/zabbix_agentd.d/*.conf
+    AllowRoot=1
