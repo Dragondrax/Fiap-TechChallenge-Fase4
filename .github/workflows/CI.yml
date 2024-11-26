@@ -9,35 +9,29 @@ on:
 jobs:
   setup-k8s:
     runs-on: ubuntu-latest
-    
+
     steps:
       # Passo 1: Checar o repositório
-      - name: Kubernetes
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Passo 2: Instalar dependências para o Minikube e kubectl
-      - name: Install Minikube
+      # Passo 2: Instalar KIND e kubectl
+      - name: Install KIND and kubectl
         run: |
-          sudo apt-get update
-          sudo apt-get install -y apt-transport-https
-          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-          echo "deb https://storage.googleapis.com/download.minikube.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/minikube.list
-          sudo apt-get update
-          sudo apt-get install -y minikube
+          curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/v0.18.0/kind-linux-amd64
+          chmod +x kind
+          sudo mv kind /usr/local/bin/kind
 
-      - name: Install kubectl
-        run: |
           curl -LO "https://dl.k8s.io/release/v1.27.0/bin/linux/amd64/kubectl"
           sudo chmod +x ./kubectl
           sudo mv ./kubectl /usr/local/bin/kubectl
 
-      # Passo 3: Iniciar o Minikube
-      - name: Start Minikube
+      # Passo 3: Criar o cluster Kubernetes com KIND
+      - name: Create Kubernetes cluster with KIND
         run: |
-          minikube start --driver=docker
-          kubectl config use-context minikube
+          kind create cluster --name my-cluster --wait 5m
 
-      # Passo 4: Testar o Kubernetes
+      # Passo 4: Verificar o status do cluster Kubernetes
       - name: Verify Kubernetes cluster
         run: |
           kubectl cluster-info
@@ -47,13 +41,18 @@ jobs:
         run: |
           kubectl apply -f k8s/api/
           kubectl apply -f k8s/postgres/
-          kubectl apply -f k8s/rabbimaq/      
+          kubectl apply -f k8s/rabbimaq/ 
 
       # Passo 6: Verificar pods e serviços
       - name: Get Kubernetes pods and services
         run: |
           kubectl get pods
           kubectl get services
+
+      # Passo 7: Deletar o cluster KIND após o uso
+      - name: Delete Kubernetes cluster with KIND
+        run: |
+          kind delete cluster --name my-cluster
 
       - name: Saída Final Tech Challenge Fase 4
         run: echo "Build projeto API e Kubernetes para a validação do Tech Challenge Fase 4."
