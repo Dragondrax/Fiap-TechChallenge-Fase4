@@ -41,7 +41,7 @@ jobs:
         run: |
           kubectl apply -f k8s/api/
           kubectl apply -f k8s/postgres/
-          kubectl apply -f k8s/rabbimaq/ 
+          kubectl apply -f k8s/rabbitmaq/ 
 
       # Passo 6: Verificar pods e serviços
       - name: Get Kubernetes pods and services
