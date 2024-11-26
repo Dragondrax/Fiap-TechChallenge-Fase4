@@ -70,11 +70,11 @@ jobs:
           kubectl get pods
           kubectl get services
 
-      # Passo 8: Liberando Portas
-      - name: Port-forward Kubernetes services
-        run: |
-          kubectl port-forward svc/rabbitmq-service 5672:5672
-          kubectl port-forward svc/postgres-service 5432:5432
+      # # Passo 8: Liberando Portas
+      # - name: Port-forward Kubernetes services
+      #   run: |
+      #     kubectl port-forward svc/rabbitmq-service 5672:5672
+      #     kubectl port-forward svc/postgres-service 5432:5432
 
       # Passo 9: Deletar o cluster KIND após o uso
       - name: Delete Kubernetes cluster with KIND
