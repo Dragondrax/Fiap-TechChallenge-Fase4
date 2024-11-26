@@ -34,12 +34,7 @@ jobs:
       # Passo 4: Verificar o status do cluster Kubernetes
       - name: Verify Kubernetes cluster
         run: |
-          kubectl cluster-info
-
-      # Passo 6: Verificar namespace
-      - name: Verificar namespace dos pods
-        run: |
-          kubectl get pods --all-namespaces
+          kubectl cluster-info      
 
       # Passo 5: Aplicar recursos Kubernetes (opcional)
       - name: Apply Kubernetes resources
@@ -47,6 +42,11 @@ jobs:
           kubectl apply -f k8s/api/
           kubectl apply -f k8s/postgres/
           kubectl apply -f k8s/rabbitmaq/ 
+
+      # Passo 6: Verificar namespace
+      - name: Verificar namespace dos pods
+        run: |
+          kubectl get pods --all-namespaces
 
       # Passo 6: Verificar pods e serviços
       - name: Get Kubernetes pods and services
