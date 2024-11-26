@@ -49,13 +49,18 @@ jobs:
           kubectl get pods
           kubectl get services
 
-      # Passo 7: Liberando Portas
-      - name: Get Kubernetes pods and services
+      # Passo 7: Aguardo dos Pods estarem OK
+      - name: Wait for all pods to be running
+        run: |
+          kubectl wait --for=condition=ready pod --all --namespace=my-namespace --timeout=300s
+
+      # Passo 8: Liberando Portas
+      - name: Port-forward Kubernetes services
         run: |
           kubectl port-forward svc/rabbitmq-service 5672:5672
           kubectl port-forward svc/postgres-service 5432:5432
 
-      # Passo 8: Deletar o cluster KIND após o uso
+      # Passo 9: Deletar o cluster KIND após o uso
       - name: Delete Kubernetes cluster with KIND
         run: |
           kind delete cluster --name my-cluster
