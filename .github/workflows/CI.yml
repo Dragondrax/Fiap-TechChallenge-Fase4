@@ -112,7 +112,7 @@ jobs:
     
     # Rodar migrations (aplicar as migrações no banco de dados)
     - name: Rodar migrations no banco de dados
-      run: dotnet ef database update --project src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.csproj
+      run: dotnet ef database update --project src/Services/Fiap.TechChallenge.Fase1.Data/Fiap.TechChallenge.Fase1.Data.csproj
      
     - name: Testes Unitários
       run: dotnet test --configuration Release --verbosity quiet src/Tests/Fiap.TechChallenge.Fase1.Tests
