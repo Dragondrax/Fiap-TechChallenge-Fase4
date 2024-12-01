@@ -1,5 +1,5 @@
 # Fiap-TechChallenge-Fase4
-Esse projeto foi desenvolvido com intuito de colocar em prática todos os conceitos aprendidos na Fase 4 da Pós Graduação da FIAP.
+Esse projeto foi desenvolvido com intuito de colocar em prática todos os conceitos aprendidos na Fase 4 da Pós Graduação da FIAP..
 
 |Alunos| E-mail|
 |------|-------|
