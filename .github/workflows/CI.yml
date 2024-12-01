@@ -7,87 +7,8 @@ on:
     branches: [ "master" ]
 
 jobs:
-  setup-k8s:
-    runs-on: ubuntu-latest
-
-    steps:
-      # Passo 1: Checar o repositório
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      # Passo 2: Instalar KIND e kubectl
-      - name: Install KIND and kubectl
-        run: |
-          curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/v0.18.0/kind-linux-amd64
-          chmod +x kind
-          sudo mv kind /usr/local/bin/kind
-
-          curl -LO "https://dl.k8s.io/release/v1.27.0/bin/linux/amd64/kubectl"
-          sudo chmod +x ./kubectl
-          sudo mv ./kubectl /usr/local/bin/kubectl
-
-      # Passo 3: Criar o cluster Kubernetes com KIND
-      - name: Create Kubernetes cluster with KIND
-        run: |
-          kind create cluster --name my-cluster --wait 5m
-
-      # Passo 4: Verificar o status do cluster Kubernetes
-      - name: Verify Kubernetes cluster
-        run: |
-          kubectl cluster-info      
-
-      # Passo 5: Aplicar recursos Kubernetes (opcional)
-      - name: Apply Kubernetes resources
-        run: |
-          kubectl apply -f k8s/api/
-          kubectl apply -f k8s/postgres/
-          kubectl apply -f k8s/rabbitmaq/ 
-
-      # Passo 6: Verificar namespace
-      - name: Verificar namespace dos pods
-        run: |
-          kubectl get pods --all-namespaces
-
-      # Passo 6: Verificar pods e serviços
-      - name: Get Kubernetes pods and services
-        run: |
-          kubectl get pods
-          kubectl get services
-      
-      # Passo 6: Verificar namespace
-      - name: Verificar namespace
-        run: |
-          kubectl get namespaces
-
-      # Passo 7: Aguardo dos Pods estarem OK
-      - name: Wait for all pods to be running
-        run: |
-          kubectl wait --for=condition=ready pod --all --namespace=default --timeout=300s
-
-        # Passo 6: Verificar pods e serviços
-      - name: Get Kubernetes pods and services
-        run: |
-          kubectl get pods
-          kubectl get services
-
-      # # Passo 8: Liberando Portas
-      # - name: Port-forward Kubernetes services
-      #   run: |
-      #     kubectl port-forward svc/rabbitmq-service 5672:5672
-      #     kubectl port-forward svc/postgres-service 5432:5432
-
-      # Passo 9: Deletar o cluster KIND após o uso
-      # - name: Delete Kubernetes cluster with KIND
-      #   run: |
-      #     kind delete cluster --name my-cluster
-
-      # - name: Saída Final Tech Challenge Fase 4
-        # run: echo "Build projeto API e Kubernetes para a validação do Tech Challenge Fase 4."
-
-
   build-and-test:
     runs-on: ubuntu-latest
-    needs: setup-k8s  # Este job depende do job "setup-k8s"
   
     steps:
     - name: Checkout code
@@ -98,27 +19,23 @@ jobs:
       with:
         dotnet-version: 8.0
         
-    # - name: Setup Docker para PostgresSQL
-    #   run: docker pull postgres
+    - name: Setup Docker para PostgresSQL
+      run: docker pull postgres
 
-    # - name: Setup Docker para RabbitMQ
-    #   run: docker pull rabbitmq:3-management
+    - name: Setup Docker para RabbitMQ
+      run: docker pull rabbitmq:3-management
       
     - name: Restore dependencias do Projeto 
       run: dotnet restore src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.sln
     
     - name: Build projeto
       run: dotnet build --configuration Release src/WebApi/Fiap.TechChallenge.Fase1.WebAPI/Fiap.TechChallenge.Fase1.WebAPI.sln      
-    
-    # Rodar migrations (aplicar as migrações no banco de dados)
-    #- name: Rodar migrations no banco de dados
-    #  run: dotnet ef database update --project ./src/Services/Fiap.TechChallenge.Fase1.Data/Fiap.TechChallenge.Fase1.Data.csproj
      
     - name: Testes Unitários
       run: dotnet test --configuration Release --verbosity quiet src/Tests/Fiap.TechChallenge.Fase1.Tests
 
-    # - name: Testes de Integração 
-    #   run: dotnet test --configuration Release src/Tests/Fiap.TechChallenge.Fase1.Integration.Test
+    - name: Testes de Integração 
+      run: dotnet test --configuration Release src/Tests/Fiap.TechChallenge.Fase1.Integration.Test
       
-    - name: Saída Final Tech Challenge Fase 3
-      run: echo "Build projeto API, criação do banco, utilização das migrations e testes unitários/integração finalizados para a validação do Tech Challenge Fase 3."
+    - name: Saída Final Tech Challenge Fase 4
+      run: echo "Build projeto API, criação do banco, utilização das migrations e testes unitários/integração finalizados para a validação do Tech Challenge Fase 4."
