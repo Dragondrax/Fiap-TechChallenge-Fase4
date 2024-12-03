@@ -17,9 +17,45 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 - GIT Link: https://git-scm.com/downloads
 - RabbitMQ Link: https://www.rabbitmq.com/
 - Kubernets Link: https://kubernetes.io/docs/tasks/tools/
-- Minikube Link: https://minikube.sigs.k8s.io/docs/handbook/kubectl/
 
-## 🔧 Instalação
+## 🔧 Ambiente Kubernetes
+
+1. Iniciar o Docker no seu computador com o Kubernetes
+2. Dentro do projeto possui uma pasta k8s onde contem todos os arquivos .yml para o ambiente Kubernetes, separados por pastas com cada componente API, Postgres, RabbitMQ, Prometheus, Grafana e os Workers
+
+![image](https://github.com/user-attachments/assets/dd27f713-6973-49fb-87b7-77d96cee4f85)
+
+
+3. Abra um terminal de sua escolha dentro dessa pasta, se preferir use o VSCode para agilizar a manipulação dos comandos.
+
+4. Para executar e subir os ambientes basta rodar os comandos para começar a subir os ambientes. Colocando o nome da pasta no comando, automaticamente é aplicado todos os arquivos .yml que estão dentro:
+
+- kubectl apply -f postgres\
+- kubectl apply -f rabbitmaq\
+- kubectl apply -f api\
+- kubectl apply -f workers\
+- kubectl apply -f workerscontato\
+- kubectl apply -f workerspersiste\
+- kubectl apply -f prometheus\
+- kubectl apply -f grafana\
+
+5. Assim que rodar o do postgres e rabbitmaq, as vezes será necessário rodar um comando para liberar a porta de acesso de cada um, pois somente assim o worker vai conseguir identificar o postgres e o rabbitmaq para criar as filas:
+
+    - Para Postgres:
+        - kubectl port-forward pod/nome-do-pod-criado 5432:5432
+    - Para o RabbitMQ
+        - kubectl port-forward pod/nome-do-pod-criado 5672:5672
+
+6. Depois que todos os Pods estiverem rodando, basta acessar o caminho localhost:<nodePort-exposição>
+
+- API: localhost:30004
+- RabbitMQ: localhost:30002
+- Grafana: localhost:30005
+
+7. Após iniciar essas etapas, realizar as mesmas configurações descritos nos itens (4,5,6,7,10,11,16) da opção de Instalação sem Kubernetes
+
+
+## 🔧 Instalação sem Kubernetes
 1. Iniciar o Docker no seu computador
 2. Abrir o prompt de comando na raiz do projeto, onde fica localizado o arquivo "docker-compose.yml" e executar o comando:
 ~~~docker
@@ -52,15 +88,18 @@ docker-compose up -d --build
 11. Dentro do Grafana: 
   - Acesse o menu de Data Source
   - Adicione um novo data source do Prometheus
-  - DataSource Prometheus: http://192.168.15.6:9090/ (ip da maquina)
+  - DataSource Prometheus: http://192.168.15.6:9090/ (ip da maquina), ou se for no Kubernetes, colocar o IP-do-Pod:9090
 12. Apos configurar o Prometheus: 
   - Ir em Administration 
   - Plugins and Data 
   - Plugins 
   - Pesquisar por Zabbix 
   - Habilitar o plugin, clicando o botao em "Enabled"
-13. Resultado Grafana
+13. Resultado Grafana com Zabbix Fase3
     ![image](https://github.com/user-attachments/assets/5c5dcc2b-1f42-45d0-9198-31cc6fa8a979)
+13. Resultado Grafana Fase4 somente com Prometheus
+    ![image](https://github.com/user-attachments/assets/29208740-16f2-4686-a7c7-23b971b3a27a)
+
 
 14. Rodar o projeto
 15. Autenticar se utilizando o usuário abaixo:
